@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Et si… Studio — connexion TikTok</title>
+<style>body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 16px;color:#14183a;background:#f6f0e1}
+code{display:block;word-break:break-all;background:#fff;padding:12px;border:1px solid #ccc;margin:8px 0}
+button{font:inherit;padding:8px 16px;cursor:pointer}</style></head>
+<body>
+<h1>Connexion TikTok</h1>
+<div id="out">Lecture de la réponse de TikTok…</div>
+<script>
+  const q = new URLSearchParams(location.search), out = document.getElementById('out');
+  if (q.get('code')) {
+    const v = location.href;
+    out.innerHTML = '<p>✅ Autorisation reçue. Copie la ligne ci-dessous et colle-la dans le terminal (tiktok.py) :</p><code id="c"></code><button id="b">Copier</button>';
+    document.getElementById('c').textContent = v;
+    document.getElementById('b').onclick = () => navigator.clipboard.writeText(v).then(() => document.getElementById('b').textContent = 'Copié ✓');
+  } else {
+    out.textContent = '❌ Pas de code reçu : ' + (q.get('error_description') || q.get('error') || 'réponse vide');
+  }
+</script>
+</body></html>
